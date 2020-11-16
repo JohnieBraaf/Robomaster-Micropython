@@ -2,7 +2,7 @@
 Robomaster S1 - Micropython CAN BUS controller
 
 Currently the project is in a proof of concept phase.
-It is a micropython port of this project: [obomaster_s1_can_hack](https://github.com/RoboMasterS1Challenge/robomaster_s1_can_hack)
+It is a micropython port of this project: [robomaster_s1_can_hack](https://github.com/RoboMasterS1Challenge/robomaster_s1_can_hack)
 
 There seems to be a bug in the micropython code preventing the non-extended frame CAN BUS addresses (used by the Robomaster) to be seen.
 Therefore I have included a patched version of the micropython code, which can be flashed to the board with [STM32CubeProgrammer](https://www.st.com/en/development-tools/stm32cubeprog.html)
@@ -15,3 +15,5 @@ Use ST-Link usb connection to flash the firmware.
 Use board USB connection to access PYBFLASH to transfer all files (except the bin folder)
 
 The client.py file can be used on a PC to connect to the board. Commands are still a work in progress as a little refactoring is needed.
+
+CAREFUL!!! currently set some example value in com.py to have the wheels spinning as a demonstration.

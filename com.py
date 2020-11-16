@@ -110,8 +110,11 @@ class Command(object):
     def add_1b(self):
         msg = self.messages[5]
 
-        x = 1024
-        y = 1024
+        x = 1024 # stationary
+        y = 1024 # stationary
+
+        x = 500 # some example value
+        y = 500 # some example value
 
         msg.bytes_ref[11] = y & 0xFF
         msg.bytes_ref[12] = ((x << 3) | (y >> 8)) & 0x07
