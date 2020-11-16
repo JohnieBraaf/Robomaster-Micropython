@@ -10,3 +10,8 @@ You can also patch a version of the micropython code yourself see: [miropython-b
 
 Current patched micropython boards (others can be build):
 - bin/firmware_NUCLEO_F767ZI.hex (2020-11-15)
+
+Use ST-Link usb connection to flash the firmware.
+Use board USB connection to access PYBFLASH to transfer all files (except the bin folder)
+
+The client.py file can be used on a PC to connect to the board. Commands are still a work in progress as a little refactoring is needed.
