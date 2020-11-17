@@ -27,7 +27,7 @@ class Command(object):
         self.robo = robo
         self.buf = RingBuffer(2048)
         self.crc = Crc()
-        self.proc = Processor()
+        #self.proc = Processor()
 
         # load template messages
         self.messages_size_max = 128 
@@ -113,9 +113,6 @@ class Command(object):
         x = 1024 # stationary
         y = 1024 # stationary
 
-        x = 500 # some example value
-        y = 500 # some example value
-
         msg.bytes_ref[11] = y & 0xFF
         msg.bytes_ref[12] = ((x << 3) | (y >> 8)) & 0x07
         msg.bytes_ref[13] = (x >> 5) & 0x3F
@@ -146,7 +143,7 @@ class Command(object):
             ran = range(r)
             for i in ran:
                 self.frame[r][3][i] = self.buf.get()
-                self.proc.add_byte(self.frame[r][3][i])
+                #self.proc.add_byte(self.frame[r][3][i])
             return self.frame[r]
         else:
             return None # empty buffer
