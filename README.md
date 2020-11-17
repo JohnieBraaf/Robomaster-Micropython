@@ -28,7 +28,8 @@ For NUCLEO boards:
 - Use board USB connection to access PYBFLASH 
 
 For PYBD boards:
-For the pyboard D-series you must enter the mboot DFU bootloader by holding down the USR button, pressing and releasing the RST button, and continuing to hold down USR until the LED is white (4th in the cycle), then let go of USR while the LED is white. The LED will then flash red once per second to indicate it is in USB DFU mode. You can then program the firmware using a DFU programmer, eg [dfu-util](http://dfu-util.sourceforge.net/) or [pydfu.py](https://github.com/micropython/micropython/blob/master/tools/pydfu.py).
+
+Enter DFU bootloader mode by holding down the USR button, pressing and releasing the RST button, and continuing to hold down USR until the LED is white (4th in the cycle), then let go of USR while the LED is white. The LED will then flash red once per second to indicate it is in USB DFU mode. You can then program the firmware using a DFU programmer, eg [dfu-util](http://dfu-util.sourceforge.net/) or [pydfu.py](https://github.com/micropython/micropython/blob/master/tools/pydfu.py).
 
 ## PYBFLASH
 
@@ -45,16 +46,19 @@ For a serial prompt:
  - Mac OS X: use the command: screen /dev/tty.usbmodem*
  - Linux: use the command: screen /dev/ttyACM0
  
- Credits to [robomaster_s1_can_hack](https://github.com/RoboMasterS1Challenge/robomaster_s1_can_hack) project, for inspiring me to create this project
+
  
  ## Network connection
  
  A socket server is setup see main.py for the configuration parameters.
  
- The client.py can be file can be used to send commands. 
+ The client.py can be file can be used to send commands from a PC. 
  
  ## TODO
  
  - Implement protocol(s) and SDK for commands (see already parsable commands in proc.py)
  - ROS bridge
+ 
+ 
+  Credits to [robomaster_s1_can_hack](https://github.com/RoboMasterS1Challenge/robomaster_s1_can_hack) project, for inspiring me to create this project
  
