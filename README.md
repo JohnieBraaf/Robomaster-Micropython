@@ -2,11 +2,9 @@
 
 This project allows the use of STM32 microcontrollers running [micropython](https://github.com/micropython/micropython) to control the Robomaster S1 or EDU.
 
-Only CAN BUS High / Low wires need to be connecting to the robot gimbal, replacing the cable leading to the control unit (with the antennas).
+Only CAN BUS High / Low wires need to be connected to the robot gimbal, replacing the cable leading to the control unit (with the antennas).
 
-A STM32 NUCLEO board can be used with a ethernet cable or a [PYBD-SF6W](https://store.micropython.org/product/PYBD-SF6-W4F2) which has WiFi.
-- Boards are clocked at 216Mhz
-- DJI CAN BUS runs @1Mbit.
+Use A STM32 NUCLEO board (ethernet) or [PYBD-SF6W](https://store.micropython.org/product/PYBD-SF6-W4F2) (WiFi).
 
 ## Micropython firmware
 The code relies on a patched version of Micropython:
