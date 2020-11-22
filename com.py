@@ -107,11 +107,16 @@ class Command(object):
     def add_10sec(self):
         pass
 
-    def add_1b(self):
+    def add_1b(self, move=False):
         msg = self.messages[5]
 
-        x = 1024 # stationary
-        y = 1024 # stationary
+        # x, y = 1024 = stationary
+        if self.robo.linear.x == 0:
+            self.robo.linear.x = 1
+        if self.robo.linear.y == 0:
+            self.robo.linear.y = 1
+        x = int(self.robo.linear.x * 1024.0)
+        y = int(self.robo.linear.y * 1024.0)
 
         msg.bytes_ref[11] = y & 0xFF
         msg.bytes_ref[12] = ((x << 3) | (y >> 8)) & 0x07

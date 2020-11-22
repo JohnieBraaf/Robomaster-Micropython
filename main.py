@@ -2,8 +2,7 @@ import uasyncio
 import time
 import network
 from robo import RoboMaster
-from srv import Server
-from beat import heartbeat
+import _thread # unsupported module
 
 ##########################
 # Config
@@ -34,23 +33,82 @@ print("IP address: " + lan.ifconfig()[0])
 
 
 ##########################
-# uasyncio inside a thread
+# Main loop
 ##########################
 
-
-import _thread # unsupported module
 robo = RoboMaster()
-def robo_thread( threadName, robo):
+
+async def heartbeat(robo):
+    interval = 10 # miliseconds
+    last = time.ticks_ms()
+    while True:
+        next = last + interval
+        sleep = next - time.ticks_ms()
+        if sleep > 0:
+            #print(sleep)
+            await uasyncio.sleep_ms(sleep)
+            last = next
+        else:
+            print('running late')
+            last = time.ticks_ms()
+        
+        robo.cb10ms()
+
+        # Try to sync loop to 10 ms
+        #next = last + interval
+        #sleep = next - time.time()
+        #if sleep > 0.0:
+        #    print(int(sleep * 1000.0))
+        #    await uasyncio.sleep_ms(int(sleep * 1000.0) - 50)
+        #    last = next
+        #else:
+        #    print('running late')
+        #    last = time.time()
+
+        #
+        
+
+async def tcp_callback(reader, writer):
+    print('TCP client connected')
+    while True:
+        try:
+            res = await reader.readline()
+            print(res.rstrip())
+            robo.process_tcp(res.rstrip());
+        except Exception as e:
+            print(e)
+            break
+
+def main(robo):
     
     loop = uasyncio.get_event_loop()
     loop.create_task(heartbeat(robo))
-    server = Server(robo)
-    try:
-        loop.run_until_complete(server.run(loop))
-    except KeyboardInterrupt:
-        print('Interrupted')
-    finally:
-        server.close()
+    loop.create_task(uasyncio.start_server(tcp_callback, "192.168.137.10", 8123))
+    loop.run_forever()
+    loop.close()
 
-# use a thread to keep REPL available for debugging
-thread1=_thread.start_new_thread( robo_thread, ("thread1", robo, ) )
+debug = False
+if debug:
+    # use a thread to keep REPL available for debugging
+    # the _thread module is not supposed to be used directly
+    thread=_thread.start_new_thread( robo_thread, (robo, ) )
+else:
+    main(robo)
+
+
+##########################
+# Notes
+##########################
+
+# observed CAN BUS addresses
+x200 =  0 # self assigned
+x201 =  1 # main control unit <-- we use this one
+x202 =  2 # motion control unit
+x203 =  3 # gimal
+x204 =  4 # blaster
+x211 =  5 # armor back
+x212 =  6
+x213 =  7
+x214 =  8
+x215 =  9
+x216 = 10

@@ -35,7 +35,7 @@ Enter DFU bootloader mode by holding down the USR button, pressing and releasing
 
 All files except the bin directory to your micro controller FLASH memory. Micropython boards are configured as a USB storage device, so just plug and copy.
 
-## Serial connection
+## Serial connection (for monitoring)
 
 The client.py file can be used on a PC to connect to the board. Commands are still a work in progress as a little refactoring is needed.
 
@@ -46,17 +46,15 @@ For a serial prompt:
  - Mac OS X: use the command: screen /dev/tty.usbmodem*
  - Linux: use the command: screen /dev/ttyACM0
  
-
- 
- ## Network connection
+ ## Clients (for control)
  
  A socket server is setup see main.py for the configuration parameters.
  
- The client.py can be file can be used to send commands from a PC. 
+ The client.py script can be used to send commands from a PC using the arrows on the keyboard. 
  
  ## TODO
  
- - Implement protocol(s) and SDK for commands (see already parsable commands in proc.py)
+ - Implement complete protocol (see already parsable commands in proc.py)
  - ROS bridge
  
  

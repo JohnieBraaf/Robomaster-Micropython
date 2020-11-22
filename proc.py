@@ -111,16 +111,16 @@ class Processor(object):
                         #0xOF: 85 15   9   4 64  4 76  0 0 # infrared beam      
                         #0xOF: 85 15 241 195  0 10 83 50 0 # Idle
                         #0xOF: 85 15   9   4 64  4 76  0 0 
-                        print("0xOF: fired " +
-                              str(self.messages[i].bytes[0])+ " " + 
-                              str(self.messages[i].bytes[1]) + ' ' + 
-                              str(self.messages[i].bytes[4])+ " " + 
-                              str(self.messages[i].bytes[5]) + " " + 
-                              str(self.messages[i].bytes[8]) + " " + 
-                              str(self.messages[i].bytes[9]) + ' ' + 
-                              str(self.messages[i].bytes[10])+ " " +
-                              str(self.messages[i].bytes[11])+ " " +
-                              str(self.messages[i].bytes[12]))
+                       '''' print("0xOF: fired " +
+                                                                                                                          str(self.messages[i].bytes[0])+ " " + 
+                                                                                                                          str(self.messages[i].bytes[1]) + ' ' + 
+                                                                                                                          str(self.messages[i].bytes[4])+ " " + 
+                                                                                                                          str(self.messages[i].bytes[5]) + " " + 
+                                                                                                                          str(self.messages[i].bytes[8]) + " " + 
+                                                                                                                          str(self.messages[i].bytes[9]) + ' ' + 
+                                                                                                                          str(self.messages[i].bytes[10])+ " " +
+                                                                                                                          str(self.messages[i].bytes[11])+ " " +
+                                                                                                                          str(self.messages[i].bytes[12]))'''
 
                 # individual wheel control
                 elif self.messages[i].bytes[1] == 0x15: # 21
