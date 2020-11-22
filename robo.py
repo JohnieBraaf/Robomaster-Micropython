@@ -26,11 +26,15 @@ class RoboMaster():
         self.timcount += 1
         self.linear.reset()
 
+        start = time.ticks_ms()
+        
         self.com.add_10ms()
-        #print(self.linear.x, self.linear.y)
+        
+        if self.timcount % 4 == 0:
+            self.com.add_40ms()
 
-        if self.timcount % 10 == 0:
-            self.com.add_100ms()
+        if self.timcount % 9 == 0:
+            self.com.add_90ms()
 
         if self.timcount % 100 == 0:
             self.com.add_1sec()
@@ -41,14 +45,16 @@ class RoboMaster():
         if self.timcount == 1001:
             self.timecount = 1
         
-        while self.com.buf.any():
-            pyb.LED(2).on()
-            while (self.can1.can.info()[5] == 3):
-                pass # wait till TX buffer is free
-            self.can1.can.send(self.com.get()[3], 0x201)
-            pyb.LED(2).off()
+        ''''while self.com.buf.any():
+                                            pyb.LED(2).on()
+                                            while (self.can1.can.info()[5] == 3):
+                                                pass # wait till TX buffer is free
+                                            self.can1.can.send(self.com.get()[3], 0x201)
+                                            pyb.LED(2).off()'''
 
-        
+        end = time.ticks_ms()
+        #if end -start > 1:
+        #    print('Time taken: ' + str(end - start))
         #print(str(self.timcount) + ' ' + str(self.linear.x))
     
     @micropython.native

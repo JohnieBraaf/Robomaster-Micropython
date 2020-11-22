@@ -11,7 +11,7 @@ The code relies on a patched version of Micropython:
 - Hack for non-extended CAN BUS addresses being filtered. See [miropython-bug](https://github.com/micropython/micropython/issues/5508).
 - Enabled _thread module to allow for REPL debugging while running a uasyncio control loop to switch between CAN RX/TX and network traffic. See [enable _thread](https://forum.micropython.org/viewtopic.php?t=8502).
 
-Current firmwares (feel free to request a build a [board](https://github.com/micropython/micropython/tree/master/ports/stm32/boards)):
+Current firmwares (feel free to request, see [boards](https://github.com/micropython/micropython/tree/master/ports/stm32/boards)):
 - bin/firmware_NUCLEO_F767ZI.hex (2020-11-17)
 - bin/firmware_PYBD_SF6.dfu (2020-11-15)
 

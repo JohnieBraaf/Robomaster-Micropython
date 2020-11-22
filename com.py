@@ -87,12 +87,16 @@ class Command(object):
 
     @micropython.viper   
     def add_10ms(self):
+        pass
+
+    @micropython.viper   
+    def add_40ms(self):
         #self.add(self.messages[5]) #1B
         self.add_1b()
         self.add(self.messages[4]) #14
 
     @micropython.viper
-    def add_100ms(self):
+    def add_90ms(self):
         self.add(self.messages[0]) #0D
         self.add(self.messages[1]) #0E
         self.add(self.messages[2]) #0F
