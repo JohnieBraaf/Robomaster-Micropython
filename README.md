@@ -1,5 +1,4 @@
-# Robomaster-Micropython
-Robomaster S1 - Micropython CAN BUS controller
+# DJI Robomaster CAN BUS Controller
 
 This project allows the use of STM32 microcontrollers running [micropython](https://github.com/micropython/micropython) to control the Robomaster S1 or EDU.
 It is meant as a replacement of the main control unit, which should be unplugged. This saves a considerable amount of the total power consumption.
@@ -36,27 +35,21 @@ Enter DFU bootloader mode by holding down the USR button, pressing and releasing
 All files except the bin directory to your micro controller FLASH memory. Micropython boards are configured as a USB storage device, so just plug and copy.
 
 ## Serial connection (for monitoring)
-
-The client.py file can be used on a PC to connect to the board. Commands are still a work in progress as a little refactoring is needed.
-
-For a serial prompt:
- - Windows: you need to go to 'Device manager', right click on the unknown device,
-   then update the driver software, using the 'pybcdc.inf' file found on this drive.
-   Then use a terminal program like Hyperterminal or putty (Serial connection 115200 baudrate).
- - Mac OS X: use the command: screen /dev/tty.usbmodem*
- - Linux: use the command: screen /dev/ttyACM0
+For a serial monitoring:
+ - Windows:  putty (baudrate 115200)
+ - Mac OS X: screen /dev/tty.usbmodem*
+ - Linux:    screen /dev/ttyACM0
  
- ## Clients (for control)
+## Clients (for control)
  
- A socket server is setup see main.py for the configuration parameters.
+A TCP socket server is setup configure IP parameters in main.py.
+The client.py script can be used from a PC to send commands using the arrows on the keyboard. 
  
- The client.py script can be used to send commands from a PC using the arrows on the keyboard. 
+## TODO
  
- ## TODO
- 
- - Implement complete protocol (see already parsable commands in proc.py)
- - ROS bridge
+- Implement complete protocol (see already parsable commands in proc.py)
+- ROS bridge
  
  
-  Credits to [robomaster_s1_can_hack](https://github.com/RoboMasterS1Challenge/robomaster_s1_can_hack) project, for inspiring me to create this project
+ Credits to [robomaster_s1_can_hack](https://github.com/RoboMasterS1Challenge/robomaster_s1_can_hack) project, for inspiring me to create this project
  

@@ -5,19 +5,14 @@ from robo import RoboMaster
 import _thread # unsupported module
 
 ##########################
-# Config
+# Network connection
 ##########################
 
-DHCP    = False
+DHCP    = False # DHCP True/False
 IP      = '192.168.137.10'
 MASK    = '255.255.255.0'
 GATEWAY = '192.168.137.1'
 DNS     = '192.168.137.1'
-
-
-##########################
-# Network connection
-##########################
 
 lan = network.LAN()
 lan.active(1)
@@ -53,20 +48,6 @@ async def heartbeat(robo):
             last = time.ticks_ms()
         
         robo.cb10ms()
-
-        # Try to sync loop to 10 ms
-        #next = last + interval
-        #sleep = next - time.time()
-        #if sleep > 0.0:
-        #    print(int(sleep * 1000.0))
-        #    await uasyncio.sleep_ms(int(sleep * 1000.0) - 50)
-        #    last = next
-        #else:
-        #    print('running late')
-        #    last = time.time()
-
-        #
-        
 
 async def tcp_callback(reader, writer):
     print('TCP client connected')
