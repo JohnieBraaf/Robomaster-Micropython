@@ -33,6 +33,7 @@ print("IP address: " + lan.ifconfig()[0])
 
 robo = RoboMaster()
 
+
 async def heartbeat(robo):
     interval = 10 # miliseconds
     last = time.ticks_ms()
@@ -54,8 +55,7 @@ async def tcp_callback(reader, writer):
     while True:
         try:
             res = await reader.readline()
-            print(res.rstrip())
-            robo.process_tcp(res.rstrip());
+            robo.process_tcp(res.rstrip())
         except Exception as e:
             print(e)
             break
@@ -64,7 +64,7 @@ def main(robo):
     
     loop = uasyncio.get_event_loop()
     loop.create_task(heartbeat(robo))
-    loop.create_task(uasyncio.start_server(tcp_callback, "192.168.137.10", 8123))
+    loop.create_task(uasyncio.start_server(tcp_callback, "192.168.137.10", 8123, backlog=1))
     loop.run_forever()
     loop.close()
 

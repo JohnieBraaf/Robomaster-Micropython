@@ -2,13 +2,12 @@
 
 This project allows the use of STM32 microcontrollers running [micropython](https://github.com/micropython/micropython) to control the Robomaster S1 or EDU.
 It is meant as a replacement of the main control unit, which should be unplugged. This saves a considerable amount of the total power consumption.
+Only CAN BUS High / Low wires need to be connecting to the robot gimbal, replacing the cable leading to the control unit (with the antennas).
 
-The NUCLEO board supports a ethernet connection to receive network commands.
-The [PYBD-SF6W](https://store.micropython.org/product/PYBD-SF6-W4F2) supports a WiFi connection and is much smaller.
+A NUCLEO board, can be using via ethernet cable or a [PYBD-SF6W](https://store.micropython.org/product/PYBD-SF6-W4F2) over WiFi.
 
 The boards are (over)clocked at 216Mhz. And the CAN BUS runs @1Mbit.
 
-Only CAN BUS High / Low wires need to be connecting to the robot gimbal, replacing the cable leading to the control unit (with the antennas).
 
 ## Micropython firmware
 The code relies on a patched version of Micropython:

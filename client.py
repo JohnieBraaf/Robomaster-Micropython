@@ -13,7 +13,7 @@ class Client():
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock.connect((self.ip, self.port))
 
-        self.speed = 0.90
+        self.speed = 0.10
         self.forward = 0
         self.backward = 0
         self.left = 0
@@ -55,8 +55,10 @@ class Client():
 
 
 client = Client()
-interval = 0.015 # loop target in seconds
+interval = 0.055 # loop target in seconds
 last = time.time()
+counter = 0
+start = time.time()
 while True:
     next = last + interval
     sleep = next - time.time()
@@ -66,8 +68,12 @@ while True:
 
     #time.sleep(0.075)
     if client.forward + client.backward + client.left + client.right > 0:
+        counter += 1
+        now = time.time()
+        print(str(counter) + ': ' + str(int((now - start) * 1000)))
+        start = now
         x = client.forward - client.backward
         y = client.left - client.right
-        print(client.forward, client.backward, client.left, client.right)
-        print(x,y)
+        #print(client.forward, client.backward, client.left, client.right)
+        #print(x,y)
         client.sock.sendall(('CMD:'+str(x)+','+str(y)+'\r\n').encode())

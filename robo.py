@@ -16,17 +16,18 @@ class RoboMaster():
         self.timcount  = 0
 
         self.tim2 = pyb.Timer(2)
-        self.tim2.init(freq=3)
-        self.tim2.callback(self.cb)
+        self.tim2.init(freq=10)
+        #self.tim2.callback(self.cb)
 
-    def cb(self, t):
-        
+    def cb(self, t):       
         self.linear.reset()
         
     def cb10ms(self):
         self.timcount += 1
+        self.linear.reset()
 
         self.com.add_10ms()
+        #print(self.linear.x, self.linear.y)
 
         if self.timcount % 10 == 0:
             self.com.add_100ms()
@@ -34,8 +35,8 @@ class RoboMaster():
         if self.timcount % 100 == 0:
             self.com.add_1sec()
 
-        if self.timcount % 1000 == 0:
-            self.com.add_10sec()
+        #if self.timcount % 1000 == 0:
+        #    self.com.add_10sec()
 
         if self.timcount == 1001:
             self.timecount = 1
@@ -47,6 +48,7 @@ class RoboMaster():
             self.can1.can.send(self.com.get()[3], 0x201)
             pyb.LED(2).off()
 
+        
         #print(str(self.timcount) + ' ' + str(self.linear.x))
     
     @micropython.native
@@ -71,38 +73,43 @@ class RoboMaster():
             #print(com)
             if com[:4] == 'CMD:':
                 val = com[4:].split(',')
-                self.linear.set(-float(val[0]), float(val[1]), 0)
+                self.linear.set(float(val[0]), -float(val[1]), 0)
             else:
                 print(com)
 
 
 class Linear():
     def __init__(self):
+        print('Linear init')
         self.t0 = time.ticks_ms()
-        self.x = 0
-        self.y = 0
-        self.z = 0
+        self.x = 0.0
+        self.y = 0.0
+        self.z = 0.0
+        self.moving = 0
 
     def reset(self):            
-        if time.ticks_diff(time.ticks_ms(), self.t0) > 100:
-            #print('reset')
-            self.x = 0
-            self.y = 0
-            self.z = 0
+        #print(self.y)    
+        if self.moving and time.ticks_diff(time.ticks_ms(), self.t0) > 300:
+            print('reset')
+            self.x = 0.0
+            self.y = 0.0
+            self.z = 0.0
+            self.moving = 0
 
     def set(self, x, y, z):
         self.t0 = time.ticks_ms()
         self.x = self.check_value(x)
         self.y = self.check_value(y)
         self.z = self.check_value(z)
+        self.moving = 1
 
     def check_value(self, value):
-        if value > 1 or value < -1:
-            value = 0
+        if value > 1.0 or value < -1.0:
+            value = 0.0
 
-        if value == 1:
+        if value == 1.0:
             value = 0.9998
-        elif value == -1:
+        elif value == -1.0:
             value = -0.9998
 
         return value
